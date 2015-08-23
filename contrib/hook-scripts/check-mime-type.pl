@@ -133,6 +133,10 @@ foreach my $path ( @files_added )
 						# from propname : propvalue format, to values in an indent list on following lines
 						if (not $mime_type)
 							{
+								if ($output_line + 1 >= scalar(@output))
+									{
+										die "$0: Unexpected EOF reading proplist.\n";
+									}
 								my $next_line_pval_indented = $output[$output_line + 1];
 								if ($next_line_pval_indented =~ /^\s{4}(.*)/)
 									{
@@ -145,6 +149,10 @@ foreach my $path ( @files_added )
 						$eol_style = $2;
 						if (not $eol_style)
 							{
+								if ($output_line + 1 >= scalar(@output))
+									{
+										die "$0: Unexpected EOF reading proplist.\n";
+									}
 								my $next_line_pval_indented = $output[$output_line + 1];
 								if ($next_line_pval_indented =~ /^\s{4}(.*)/)
 									{
